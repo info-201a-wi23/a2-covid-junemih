@@ -9,21 +9,21 @@
  # NOTE: You will often be asked to pull() specific values from your analysis.
 
 # 1.a Load the tidyverse package and the dplyr package
-`install.packages`("tidyverse")
-`library`("dplyr")
+install.packages("tidyverse")
+library("dplyr")
 
 # 1.b Load the *national level* data from the following URL into a variable called `national`
 # https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-national-covid-2023.csv
-`national` <- read.csv("https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-national-covid-2023.csv", stringsAsFactors = FALSE)
+national <- read.csv("https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-national-covid-2023.csv", stringsAsFactors = FALSE)
 
 # 1.c Load the *state level* data from the following URL into a variable called `states`
 # https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-states-covid-2023.csv
-`states` <- read.csv("https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-states-covid-2023.csv", stringsAsFactors = FALSE)
+states <- read.csv("https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-states-covid-2023.csv", stringsAsFactors = FALSE)
 
 # 1.d Load the *county level* data from the following URL into a variable called `counties`
 # NOTE: This is a large dataset. It may take 30-60 seconds to load.
 # https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-counties-covid-2023.csv
-`counties` <- read.csv("https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-counties-covid-2023.csv", stringsAsFactors = FALSE)
+counties <- read.csv("https://github.com/melaniewalsh/Neat-Datasets/raw/main/us-counties-covid-2023.csv", stringsAsFactors = FALSE)
 
 View(national)
 View(states)
@@ -160,17 +160,14 @@ national <- national %>%
 
 # 3. Grouped Analysis --------------------------------------------------------
 
-################# 
-
 # 3.a For each state, what is the county with the highest number of COVID cases? Make a dataframe that has every state and the county with the highest number of cases and corresponding rows (hint: you will need to use a grouping operation and a filter)
 # Save as `highest_cases_in_each_state`
 `highest_cases_in_each_state` <- counties %>% 
+  filter(date == max(date)) %>%
   group_by(state) %>% 
   filter(cases == max(cases))
   
 View(`highest_cases_in_each_state`)
-
-#################
 
 # Reflection 3 (answer in README.md file)
 # Inspect the `highest_cases_in_each_state` dataframe
